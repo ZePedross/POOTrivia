@@ -9,7 +9,7 @@ public class Natacao extends Pergunta{
     }
 
     public void pontuacao(int pontuacao) {
-        pontuacao += 3 + 10;
+        pontuacao += 13;
     }
 
     @Override

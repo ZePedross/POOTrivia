@@ -1,9 +1,9 @@
 package Main;
 
-import Perguntas.Artes;
-import Perguntas.Pergunta;
+import Perguntas.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class POOTrivia {
 
         POOTrivia pooTrivia = new POOTrivia();
 
-        for (Pergunta pergunta : perguntas) {
+        for(Pergunta pergunta: perguntas) {
             System.out.println(pergunta);
         }
 
@@ -34,8 +34,13 @@ public class POOTrivia {
         window.setResizable(false);
         window.setTitle("POOTrivia");
 
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(768, 576));
+        panel.setBackground(Color.WHITE);
+        panel.setDoubleBuffered(true);
+        panel.setFocusable(true);
+        
+        window.add(panel);
 
         window.pack();
 
@@ -54,14 +59,34 @@ public class POOTrivia {
                     perguntasFicheiro.add(linha);
                 }
 
-                for(int p = 0; p < perguntasFicheiro.size() - 5; p++) {
+                while(perguntasFicheiro.size() > 5) {
                     perguntasFicheiro.remove(rand.nextInt(perguntasFicheiro.size()));
                 }
 
                 for (String p : perguntasFicheiro) {
                     String[] infoPergunta = perguntasFicheiro.get(rand.nextInt(perguntasFicheiro.size())).split(" / ");
+                    String categoria = infoPergunta[0];
                     ArrayList<String> opcoes = new ArrayList<>(Arrays.asList(infoPergunta).subList(2, infoPergunta.length));
-                    perguntas.add(new Artes(infoPergunta[0], infoPergunta[1], opcoes, opcoes.get(0)));
+                    switch (categoria) {
+                        case "Artes":
+                            perguntas.add(new Artes(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            break;
+                        case "Ciências":
+                            perguntas.add(new Ciencia(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            break;
+                        case "Natação":
+                            perguntas.add(new Natacao(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            break;
+                        case "Ski":
+                            perguntas.add(new Ski(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            break;
+                        case "Futebol":
+                            perguntas.add(new Futebol(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            break;
+                        default:
+                            System.out.println("A categoria não existe, logo a pergunta não foi criada.");
+                            break;
+                    }
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Erro ao abrir o ficheiro de texto.");
@@ -70,7 +95,7 @@ public class POOTrivia {
             }
         }
         else{
-            System.out.println("O ficheiro não existe");
+            System.out.println("O ficheiro não existe!");
         }
     }
 }

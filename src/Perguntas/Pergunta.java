@@ -4,13 +4,9 @@ import java.util.ArrayList;
 
 public abstract class Pergunta {
 
-    protected String categoria;
-
-    protected String pergunta;
+    protected String categoria, pergunta, correta;
 
     protected ArrayList<String> opcoes;
-
-    protected String correta;
 
     protected int pontuacaoBase;
 
@@ -66,6 +62,6 @@ public abstract class Pergunta {
 
     @Override
     public String toString() {
-        return "Categoria:" + categoria + "\nPergunta: " + pergunta + "\nOpcoes: " + opcoes + "\nOpção Correta:" + correta;
+        return "Categoria: " + getCategoria() + "\nPergunta: " + getPergunta() + "\nOpcoes: " + getOpcoes() + "\nOpção Correta:" + getCorreta();
     }
 }

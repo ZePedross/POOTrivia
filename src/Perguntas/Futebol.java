@@ -9,7 +9,7 @@ public class Futebol extends Pergunta{
     }
 
     public void pontuacao(int pontuacao) {
-        pontuacao += 3 + 1;
+        pontuacao += 4;
     }
 
     @Override
