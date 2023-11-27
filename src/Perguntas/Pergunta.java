@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public abstract class Pergunta {
 
-    protected String categoria, pergunta, correta;
+    protected String categoria, pergunta;
 
     protected ArrayList<String> opcoes;
 
-    protected int pontuacaoBase;
+    protected int pontuacaoBase, index;
 
-    public Pergunta(String categoria, String pergunta, ArrayList<String> opcoes, String correta){
+    public Pergunta(String categoria, String pergunta, ArrayList<String> opcoes, int index){
         this.categoria = categoria;
         this.pergunta = pergunta;
         this.opcoes = opcoes;
-        this.correta = correta;
         this.pontuacaoBase = 5;
+        this.index = index;
     }
 
     public String getCategoria() {
@@ -42,14 +42,6 @@ public abstract class Pergunta {
         this.opcoes = opcoes;
     }
 
-    public String getCorreta() {
-        return correta;
-    }
-
-    public void setCorreta(String correta) {
-        this.correta = correta;
-    }
-
     public int getPontuacaoBase() {
         return pontuacaoBase;
     }
@@ -58,10 +50,20 @@ public abstract class Pergunta {
         this.pontuacaoBase = pontuacao;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public abstract String getCorreta();
+
     public abstract void pontuacao(int pontuacao);
 
     @Override
     public String toString() {
-        return "Categoria: " + getCategoria() + "\nPergunta: " + getPergunta() + "\nOpcoes: " + getOpcoes() + "\nOpção Correta:" + getCorreta();
+        return "Pergunta " + getIndex() + "\nCategoria: " + getCategoria() + "\nPergunta: " + getPergunta() + "\nOpcoes: " + getOpcoes();
     }
 }

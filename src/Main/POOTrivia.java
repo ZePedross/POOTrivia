@@ -39,7 +39,7 @@ public class POOTrivia {
         panel.setBackground(Color.WHITE);
         panel.setDoubleBuffered(true);
         panel.setFocusable(true);
-        
+
         window.add(panel);
 
         window.pack();
@@ -47,6 +47,11 @@ public class POOTrivia {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
+
+    public void painelPergunta(String Pergunta, String[] opcoes) {
+
+    }
+
 
     public void sortearPerguntas(){
         File f = new File("Perguntas.txt");
@@ -63,30 +68,32 @@ public class POOTrivia {
                     perguntasFicheiro.remove(rand.nextInt(perguntasFicheiro.size()));
                 }
 
-                for (String p : perguntasFicheiro) {
-                    String[] infoPergunta = perguntasFicheiro.get(rand.nextInt(perguntasFicheiro.size())).split(" / ");
+                int idx = 1;
+                for (String p: perguntasFicheiro) {
+                    String[] infoPergunta = p.split(" / ");
                     String categoria = infoPergunta[0];
                     ArrayList<String> opcoes = new ArrayList<>(Arrays.asList(infoPergunta).subList(2, infoPergunta.length));
                     switch (categoria) {
                         case "Artes":
-                            perguntas.add(new Artes(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            perguntas.add(new Artes(categoria, infoPergunta[1], opcoes, idx));
                             break;
                         case "Ciências":
-                            perguntas.add(new Ciencia(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            perguntas.add(new Ciencia(categoria, infoPergunta[1], opcoes, idx));
                             break;
                         case "Natação":
-                            perguntas.add(new Natacao(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            perguntas.add(new Natacao(categoria, infoPergunta[1], opcoes, idx));
                             break;
                         case "Ski":
-                            perguntas.add(new Ski(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            perguntas.add(new Ski(categoria, infoPergunta[1], opcoes, idx));
                             break;
                         case "Futebol":
-                            perguntas.add(new Futebol(categoria, infoPergunta[1], opcoes, opcoes.get(0)));
+                            perguntas.add(new Futebol(categoria, infoPergunta[1], opcoes, idx));
                             break;
                         default:
                             System.out.println("A categoria não existe, logo a pergunta não foi criada.");
                             break;
                     }
+                    idx++;
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Erro ao abrir o ficheiro de texto.");
