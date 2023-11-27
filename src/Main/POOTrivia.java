@@ -1,12 +1,14 @@
 package Main;
 
+import Perguntas.Artes;
+import Perguntas.Pergunta;
+
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class POOTrivia {
 
     private ArrayList<String> perguntasFicheiro = new ArrayList<>();
@@ -58,7 +60,8 @@ public class POOTrivia {
 
                 for (String p : perguntasFicheiro) {
                     String[] infoPergunta = perguntasFicheiro.get(rand.nextInt(perguntasFicheiro.size())).split(" / ");
-                    perguntas.add(new Pergunta(infoPergunta));
+                    ArrayList<String> opcoes = new ArrayList<>(Arrays.asList(infoPergunta).subList(2, infoPergunta.length));
+                    perguntas.add(new Artes(infoPergunta[0], infoPergunta[1], opcoes, opcoes.get(0)));
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Erro ao abrir o ficheiro de texto.");
