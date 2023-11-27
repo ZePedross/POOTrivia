@@ -1,5 +1,5 @@
-Arte//Quem é o pintor renascentista italiano famoso por obras como "A Última Ceia" e "Mona Lisa"?//Leonardo da Vinci//Pablo Picasso//Michelangelo//Vincent van Gogh
-Arte//Qual movimento artístico foi caracterizado por formas geométricas abstratas e uso de cores primárias?//Surrealismo//Barroco//Cubismo//Renascimento
-Arte//Quem é o autor da escultura icônica "O Pensador", representando um homem em profundo pensamento?//Auguste Rodin//Donatello//Gian Lorenzo Bernini//Constantin Brâncuși
-Arte//Qual é a técnica de pintura que utiliza água e pigmentos sobre papel, criando obras delicadas e transparentes?//Aquarela//Óleo sobre tela//Guache//Tempera
-Arte//Quem é considerado um dos pioneiros do movimento surrealista e é conhecido por suas pinturas oníricas, como "A Persistência da Memória"?//Salvador Dalí//Jackson Pollock//Frida Kahlo//Henri Matisse
+Arte / Quem é o pintor renascentista italiano famoso por obras como "A Última Ceia" e "Mona Lisa"? / Leonardo da Vinci / Pablo Picasso / Michelangelo / Vincent van Gogh
+Arte / Qual movimento artístico foi caracterizado por formas geométricas abstratas e uso de cores primárias? / Surrealismo / Barroco / Cubismo / Renascimento
+Arte / Quem é o autor da escultura icônica "O Pensador", representando um homem em profundo pensamento? / Auguste Rodin / Donatello / Gian Lorenzo Bernini / Constantin Brâncuși
+Arte / Qual é a técnica de pintura que utiliza água e pigmentos sobre papel, criando obras delicadas e transparentes? / Aquarela / Óleo sobre tela / Guache / Tempera
+Arte / Quem é considerado um dos pioneiros do movimento surrealista e é conhecido por suas pinturas oníricas, como "A Persistência da Memória"? / Salvador Dalí / Jackson Pollock / Frida Kahlo / Henri Matisse

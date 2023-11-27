@@ -1,13 +1,18 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pergunta {
-    protected String pergunta;
-    protected String correta;
-    ArrayList<String> opcoes = new ArrayList<>();
 
-    public Pergunta(String per){
+    protected String[] pergunta;
 
+    public Pergunta(String[] pergunta){
+        this.pergunta = pergunta;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(pergunta);
     }
 }
