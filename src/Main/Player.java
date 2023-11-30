@@ -8,7 +8,7 @@ public class Player {
 
     public Player(String name, int pontuacao) {
         this.name = name;
-        this.pontuacao = 5;
+        this.pontuacao = 0;
     }
 
     public String getName() {

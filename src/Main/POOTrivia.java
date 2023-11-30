@@ -3,7 +3,7 @@ package Main;
 import Perguntas.*;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class POOTrivia {
 
     private ArrayList<String> perguntasFicheiro = new ArrayList<>();
 
-    private static ArrayList<Pergunta> perguntas = new ArrayList<>();
+    protected ArrayList<Pergunta> perguntas = new ArrayList<>();
 
     private Random rand  = new Random();
 
@@ -25,7 +25,7 @@ public class POOTrivia {
 
         POOTrivia pooTrivia = new POOTrivia();
 
-        for(Pergunta pergunta: perguntas) {
+        for(Pergunta pergunta: pooTrivia.perguntas) {
             System.out.println(pergunta);
         }
 
@@ -34,11 +34,12 @@ public class POOTrivia {
         window.setResizable(false);
         window.setTitle("POOTrivia");
 
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(768, 576));
-        panel.setBackground(Color.WHITE);
-        panel.setDoubleBuffered(true);
-        panel.setFocusable(true);
+        GamePanel panel = new GamePanel();
+        panel.painelPrincipal();
+
+        ButtonListener buttonListener = new ButtonListener();
+        panel.novoJogo.addActionListener(buttonListener);
+        panel.sairJogo.addActionListener(buttonListener);
 
         window.add(panel);
 
@@ -46,10 +47,6 @@ public class POOTrivia {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-    }
-
-    public void painelPergunta(String Pergunta, String[] opcoes) {
-
     }
 
 
