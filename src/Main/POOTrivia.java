@@ -35,7 +35,8 @@ public class POOTrivia {
         window.setTitle("POOTrivia");
 
         GamePanel panel = new GamePanel();
-        panel.painelPrincipal();
+        //panel.painelPrincipal();
+        panel.painelPerguntasVF(pooTrivia.perguntas.get(0).getPergunta(), new String[]{"A","B"});
 
         ButtonListener buttonListener = new ButtonListener();
         panel.novoJogo.addActionListener(buttonListener);

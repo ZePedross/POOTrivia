@@ -1,8 +1,8 @@
-Artes / <html><body style='text-align:center'>Quem é o pintor renascentista italianofamoso por obras<br>como "A Última Ceia" e "Mona Lisa"?<body><html> / Leonardo da Vinci / Pablo Picasso / Michelangelo / Vincent van Gogh / Salvador Dali
-Artes / <html><body style='text-align:center'>Qual movimento artístico foi caracterizado por formas<br>geométricas abstratas e uso de cores primárias?<body><html> / Surrealismo / Barroco / Cubismo / Renascimento / Pop Art
-Artes / <html><body style='text-align:center'>Quem é o autor da escultura iconica "O Pensador",<br>representando um homem em profundo pensamento?<body><html> / Auguste Rodin / Donatello / Gian Lorenzo Bernini / Constantin Brâncuși / Michelangelo
-Artes / <html><body style='text-align:center'>Qual é a técnica de pintura que utiliza água e pigmentos sobre papel,<br>criando obras delicadas e transparentes?<body><html> / Aquarela / Óleo sobre tela / Guache / Tempera / Tinta da china
-Artes / <html><body style='text-align:center'>Quem é considerado um dos pioneiros do movimento surrealista e é conhecido<br>por suas pinturas oníricas, como "A Persistência da Memória"?<body><html> / Salvador Dalí / Jackson Pollock / Frida Kahlo / Henri Matisse/ Pablo Picasso
+Artes / Quem é o pintor renascentista italianofamoso por obras como "A Última Ceia" e "Mona Lisa"? / Leonardo da Vinci / Pablo Picasso / Michelangelo / Vincent van Gogh / Salvador Dali
+Artes / Qual movimento artístico foi caracterizado por formas geométricas abstratas e uso de cores primárias? / Surrealismo / Barroco / Cubismo / Renascimento / Pop Art
+Artes / Quem é o autor da escultura iconica "O Pensador", representando um homem em profundo pensamento? / Auguste Rodin / Donatello / Gian Lorenzo Bernini / Constantin Brâncuși / Michelangelo
+Artes / Qual é a técnica de pintura que utiliza água e pigmentos sobre papel, criando obras delicadas e transparentes? / Aquarela / Óleo sobre tela / Guache / Tempera / Tinta da china
+Artes / Quem é considerado um dos pioneiros do movimento surrealista e é conhecido por suas pinturas oníricas, como "A Persistência da Memória"? / Salvador Dalí / Jackson Pollock / Frida Kahlo / Henri Matisse/ Pablo Picasso
 Natação / Tradicionalmente, as piscinas olímpicas tinham 8 pistas / Verdadeiro / Falso
 Natação / As provas de natação podem ser de 50, 100, 200, 400, 800, 1600 metros. / Falso / Verdadeiro
 Natação / Léon Marchand quebrou o record de Michael Phelps nos 800 metros individuais. / Falso / Verdadeiro
