@@ -2,7 +2,7 @@ Artes / Quem é o pintor renascentista italiano famoso por obras como "A Última
 Artes / Qual movimento artístico foi caracterizado por formas geométricas abstratas e uso de cores primárias? / Surrealismo / Barroco / Cubismo / Renascimento / Pop Art
 Artes / Quem é o autor da escultura iconica "O Pensador", representando um homem em profundo pensamento? / Auguste Rodin / Donatello / Gian Lorenzo Bernini / Constantin Brâncuși / Michelangelo
 Artes / Qual é a técnica de pintura que utiliza água e pigmentos sobre papel, criando obras delicadas e transparentes? / Aquarela / Óleo sobre tela / Guache / Tempera / Tinta da china
-Artes / Quem é considerado um dos pioneiros do movimento surrealista e é conhecido por suas pinturas oníricas, como "A Persistência da Memória"? / Salvador Dalí / Jackson Pollock / Frida Kahlo / Henri Matisse/ Pablo Picasso
+Artes / Quem é considerado um dos pioneiros do movimento surrealista e é conhecido por suas pinturas oníricas, como "A Persistência da Memória"? / Salvador Dalí / Jackson Pollock / Frida Kahlo / Henri Matisse / Pablo Picasso
 Natação / Tradicionalmente, as piscinas olímpicas tinham 8 pistas / Verdadeiro / Falso
 Natação / As provas de natação podem ser de 50, 100, 200, 400, 800, 1600 metros. / Falso / Verdadeiro
 Natação / Léon Marchand quebrou o record de Michael Phelps nos 800 metros individuais. / Falso / Verdadeiro
@@ -22,4 +22,4 @@ Ciências / Há quantos anos se estima que o Homo Sapiens surgiu? / 200000 anos 
 Ciências / Qual o simbolo do elemento mercúrio? / Hg / Ag / He / O / C / Me / Mr / Ha / Hh
 Ciências / Qual o nome do projeto que desenvolveu a primeira bomba atómica? / Manhattan / Chicago / Atómic / Nuclear / ABomb / Trinity / Los Alamos / Crossroads / Teapot
 Ciências / Quem desenvolveu a teoria da relatividade? / Einstein / Marie Curie / Newton / Pitágoras / Descartes / Oppenheimer / Stephen Hawking / Bohr / Thomas Edison
-Ciências / Quantas luas tem saturno? 146 / 10 / 11 / 15 / 9 / 145 / 144 / 147 / 150
+Ciências / Quantas luas tem saturno? / 146 / 10 / 11 / 15 / 9 / 145 / 144 / 147 / 150

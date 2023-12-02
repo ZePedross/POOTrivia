@@ -39,7 +39,7 @@ public class POOTrivia {
 
         //panel.painelPerguntasVF(pooTrivia.perguntas.get(0).getPergunta(), new String[]{"A","B"});
 
-        ButtonListener buttonListener = new ButtonListener(panel,pooTrivia.perguntas);
+        ButtonListener buttonListener = new ButtonListener(panel, pooTrivia.perguntas);
         panel.opc1.addActionListener(buttonListener);
         panel.opc2.addActionListener(buttonListener);
         panel.opc3.addActionListener(buttonListener);
@@ -47,7 +47,8 @@ public class POOTrivia {
         panel.opc5.addActionListener(buttonListener);
         panel.novoJogo.addActionListener(buttonListener);
         panel.sairJogo.addActionListener(buttonListener);
-
+        panel.verdadeiro.addActionListener(buttonListener);
+        panel.falso.addActionListener(buttonListener);
 
         window.add(panel);
 

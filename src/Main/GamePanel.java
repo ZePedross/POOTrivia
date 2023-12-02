@@ -61,16 +61,30 @@ public class GamePanel extends JPanel {
         this.add(sairJogo);
     }
 
-    public void painelPerguntasOpcoes(String pergunta, ArrayList<String> opcoes) {
+    public void painelPerguntasOpcoes(String categoria, String pergunta, ArrayList<String> opcoes) {
         removeAll();
-        JLabel p = new JLabel(pergunta);
+
+        JLabel c = new JLabel(categoria);
+        c.setFont(new Font("Verdana", Font.BOLD, 30));
+        c.setForeground(Color.BLACK);
+
+        JTextArea p = new JTextArea(pergunta, 3, 30);
         p.setFont(new Font("Arial", Font.BOLD, 20));
         p.setForeground(Color.BLACK);
+        p.setWrapStyleWord(true);
+        p.setLineWrap(true);
+        p.setEditable(false);
 
-        int xLabel = center - (p.getPreferredSize().width / 2);
-        int yLabel = 100;
+        int xCategoria = center - (c.getPreferredSize().width / 2);
+        int yCategoria = 50;
 
-        p.setBounds(xLabel, yLabel, p.getPreferredSize().width, p.getPreferredSize().height);
+        int xPergunta = center - (p.getPreferredSize().width / 2);
+        int yPergunta = 100;
+
+        c.setBounds(xCategoria, yCategoria, c.getPreferredSize().width, c.getPreferredSize().height);
+        p.setBounds(xPergunta, yPergunta, p.getPreferredSize().width, p.getPreferredSize().height);
+
+        this.add(c);
         this.add(p);
 
         int xOpc = center - 150;
@@ -82,19 +96,19 @@ public class GamePanel extends JPanel {
         opc4.setText(opcoes.get(3));
         opc5.setText(opcoes.get(4));
 
-        opc1.setBounds(xOpc, yOpc - 113, 300, 50);
+        opc1.setBounds(xOpc, yOpc - 88, 300, 50);
         opc1.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        opc2.setBounds(xOpc, yOpc - 37, 300, 50);
+        opc2.setBounds(xOpc, yOpc - 12, 300, 50);
         opc2.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        opc3.setBounds(xOpc, yOpc + 37, 300, 50);
+        opc3.setBounds(xOpc, yOpc + 62, 300, 50);
         opc3.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        opc4.setBounds(xOpc, yOpc + 113, 300, 50);
+        opc4.setBounds(xOpc, yOpc + 138, 300, 50);
         opc4.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        opc5.setBounds(xOpc, yOpc + 113, 300, 50);
+        opc5.setBounds(xOpc, yOpc + 213, 300, 50);
         opc5.setFont(new Font("Arial", Font.PLAIN, 20));
 
         this.add(opc1);
@@ -104,16 +118,30 @@ public class GamePanel extends JPanel {
         this.add(opc5);
     }
 
-    public void painelPerguntasVF(String pergunta, ArrayList<String> opcoes) {
+    public void painelPerguntasVF(String categoria, String pergunta, ArrayList<String> opcoes) {
         removeAll();
-        JLabel p = new JLabel(pergunta);
+
+        JLabel c = new JLabel(categoria);
+        c.setFont(new Font("Verdana", Font.BOLD, 30));
+        c.setForeground(Color.BLACK);
+
+        JTextArea p = new JTextArea(pergunta, 3, 30);
         p.setFont(new Font("Arial", Font.BOLD, 20));
         p.setForeground(Color.BLACK);
+        p.setWrapStyleWord(true);
+        p.setLineWrap(true);
+        p.setEditable(false);
 
-        int xLabel = center - (p.getPreferredSize().width / 2);
-        int yLabel = 100;
+        int xCategoria = center - (c.getPreferredSize().width / 2);
+        int yCategoria = 50;
 
-        p.setBounds(xLabel, yLabel, p.getPreferredSize().width, p.getPreferredSize().height);
+        int xPergunta = center - (p.getPreferredSize().width / 2);
+        int yPergunta = 150;
+
+        c.setBounds(xCategoria, yCategoria, c.getPreferredSize().width, c.getPreferredSize().height);
+        p.setBounds(xPergunta, yPergunta, p.getPreferredSize().width, p.getPreferredSize().height);
+
+        this.add(c);
         this.add(p);
 
         int xOpc = center - 150;

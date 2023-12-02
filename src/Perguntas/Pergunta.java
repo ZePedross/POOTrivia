@@ -34,14 +34,6 @@ public abstract class Pergunta {
         this.pergunta = pergunta;
     }
 
-    public ArrayList<String> getOpcoes() {
-        return opcoes;
-    }
-
-    public void setOpcoes(ArrayList<String> opcoes) {
-        this.opcoes = opcoes;
-    }
-
     public int getPontuacaoBase() {
         return pontuacaoBase;
     }
@@ -57,6 +49,10 @@ public abstract class Pergunta {
     public void setIndex(int index) {
         this.index = index;
     }
+
+    public abstract ArrayList<String> getOpcoes();
+
+    public abstract void setOpcoes(ArrayList<String> opcoes);
 
     public abstract String getCorreta();
 
