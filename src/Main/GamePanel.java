@@ -2,6 +2,7 @@ package Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
 
@@ -10,7 +11,7 @@ public class GamePanel extends JPanel {
 
     protected int center = (screenWidth / 2);
 
-    protected JButton novoJogo, verRank, sairJogo, opc1, opc2, opc3, opc4, verdadeiro, falso;
+    protected JButton novoJogo, verRank, sairJogo, opc1, opc2, opc3, opc4, opc5, verdadeiro, falso;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -27,7 +28,7 @@ public class GamePanel extends JPanel {
         opc2 = new JButton();
         opc3 = new JButton();
         opc4 = new JButton();
-
+        opc5 = new JButton();
 
         verdadeiro = new JButton("Verdadeiro");
         falso = new JButton("Falso");
@@ -60,7 +61,8 @@ public class GamePanel extends JPanel {
         this.add(sairJogo);
     }
 
-    public void painelPerguntasOpcoes(String pergunta, String[] opcoes) {
+    public void painelPerguntasOpcoes(String pergunta, ArrayList<String> opcoes) {
+        removeAll();
         JLabel p = new JLabel(pergunta);
         p.setFont(new Font("Arial", Font.BOLD, 20));
         p.setForeground(Color.BLACK);
@@ -74,10 +76,11 @@ public class GamePanel extends JPanel {
         int xOpc = center - 150;
         int yOpc = screenHeight / 2;
 
-        opc1.setText(opcoes[0]);
-        opc2.setText(opcoes[1]);
-        opc3.setText(opcoes[2]);
-        opc4.setText(opcoes[3]);
+        opc1.setText(opcoes.get(0));
+        opc2.setText(opcoes.get(1));
+        opc3.setText(opcoes.get(2));
+        opc4.setText(opcoes.get(3));
+        opc5.setText(opcoes.get(4));
 
         opc1.setBounds(xOpc, yOpc - 113, 300, 50);
         opc1.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -91,13 +94,18 @@ public class GamePanel extends JPanel {
         opc4.setBounds(xOpc, yOpc + 113, 300, 50);
         opc4.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        opc5.setBounds(xOpc, yOpc + 113, 300, 50);
+        opc5.setFont(new Font("Arial", Font.PLAIN, 20));
+
         this.add(opc1);
         this.add(opc2);
         this.add(opc3);
         this.add(opc4);
+        this.add(opc5);
     }
 
-    public void painelPerguntasVF(String pergunta, String[] opcoes) {
+    public void painelPerguntasVF(String pergunta, ArrayList<String> opcoes) {
+        removeAll();
         JLabel p = new JLabel(pergunta);
         p.setFont(new Font("Arial", Font.BOLD, 20));
         p.setForeground(Color.BLACK);

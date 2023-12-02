@@ -35,12 +35,19 @@ public class POOTrivia {
         window.setTitle("POOTrivia");
 
         GamePanel panel = new GamePanel();
-        //panel.painelPrincipal();
-        panel.painelPerguntasVF(pooTrivia.perguntas.get(0).getPergunta(), new String[]{"A","B"});
+        panel.painelPrincipal();
 
-        ButtonListener buttonListener = new ButtonListener();
+        //panel.painelPerguntasVF(pooTrivia.perguntas.get(0).getPergunta(), new String[]{"A","B"});
+
+        ButtonListener buttonListener = new ButtonListener(panel,pooTrivia.perguntas);
+        panel.opc1.addActionListener(buttonListener);
+        panel.opc2.addActionListener(buttonListener);
+        panel.opc3.addActionListener(buttonListener);
+        panel.opc4.addActionListener(buttonListener);
+        panel.opc5.addActionListener(buttonListener);
         panel.novoJogo.addActionListener(buttonListener);
         panel.sairJogo.addActionListener(buttonListener);
+
 
         window.add(panel);
 
