@@ -13,20 +13,24 @@ public class POOTrivia {
 
     private ArrayList<String> perguntasFicheiro = new ArrayList<>();
 
-    protected ArrayList<Pergunta> perguntas = new ArrayList<>();
+    private ArrayList<Pergunta> perguntas = new ArrayList<>();
+
+    private ArrayList<Player> jogadores = new ArrayList<>();
+
+    private ArrayList<String> topJogadores = new ArrayList<>();
 
     private Random rand  = new Random();
 
     public POOTrivia() {
-        sortearPerguntas();
+        lerFicheiroJogadores();
     }
 
     public static void main(String[] args) {
 
         POOTrivia pooTrivia = new POOTrivia();
 
-        for(Pergunta pergunta: pooTrivia.perguntas) {
-            System.out.println(pergunta);
+        for(Player p: pooTrivia.jogadores) {
+            System.out.println(p);
         }
 
         JFrame window = new JFrame();
@@ -37,9 +41,7 @@ public class POOTrivia {
         GamePanel panel = new GamePanel();
         panel.painelPrincipal();
 
-        //panel.painelPerguntasVF(pooTrivia.perguntas.get(0).getPergunta(), new String[]{"A","B"});
-
-        ButtonListener buttonListener = new ButtonListener(panel, pooTrivia.perguntas);
+        ButtonListener buttonListener = new ButtonListener(panel, pooTrivia, pooTrivia.perguntas, pooTrivia.jogadores);
         panel.opc1.addActionListener(buttonListener);
         panel.opc2.addActionListener(buttonListener);
         panel.opc3.addActionListener(buttonListener);
@@ -49,6 +51,7 @@ public class POOTrivia {
         panel.sairJogo.addActionListener(buttonListener);
         panel.verdadeiro.addActionListener(buttonListener);
         panel.falso.addActionListener(buttonListener);
+        panel.enviar.addActionListener(buttonListener);
 
         window.add(panel);
 
@@ -58,8 +61,8 @@ public class POOTrivia {
         window.setVisible(true);
     }
 
-
     public void sortearPerguntas(){
+        perguntas.clear();
         File f = new File("Perguntas.txt");
         if(f.exists() && f.isFile()){
             try{
@@ -101,6 +104,56 @@ public class POOTrivia {
                     }
                     idx++;
                 }
+            } catch (FileNotFoundException e) {
+                System.out.println("Erro ao abrir o ficheiro de texto.");
+            } catch (IOException e) {
+                System.out.println("Erro ao ler o ficheiro de texto.");
+            }
+        }
+        else{
+            System.out.println("O ficheiro não existe!");
+        }
+    }
+
+    public void lerFicheiroJogadores() {
+        File f = new File("Jogadores.txt");
+        if(f.exists() && f.isFile()){
+            try{
+                FileReader fr = new FileReader(f);
+                BufferedReader br = new BufferedReader(fr);
+                String linha;
+                while ((linha = br.readLine()) != null) {
+                    String[] data = linha.split(" / ");
+                    String name = data[0];
+                    ArrayList<String> respostasDadas = new ArrayList<>(Arrays.asList(data).subList(1, data.length));
+                    jogadores.add(new Player(name, respostasDadas));
+                }
+                br.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Erro ao abrir o ficheiro de texto.");
+            } catch (IOException e) {
+                System.out.println("Erro ao ler o ficheiro de texto.");
+            }
+        }
+        else{
+            System.out.println("O ficheiro não existe!");
+        }
+    }
+
+    public void escreverFicheiroJogadores() {
+        File f = new File("Jogadores.txt");
+        if(f.exists() && f.isFile()){
+            try{
+                FileWriter fw = new FileWriter(f);
+                BufferedWriter bw = new BufferedWriter(fw);
+                for (Player player : jogadores) {
+                    bw.write(player.name + " / ");
+                    for (String resposta : player.respostasDadas) {
+                        bw.write(resposta + " / ");
+                    }
+                    bw.newLine();
+                }
+                bw.close();
             } catch (FileNotFoundException e) {
                 System.out.println("Erro ao abrir o ficheiro de texto.");
             } catch (IOException e) {

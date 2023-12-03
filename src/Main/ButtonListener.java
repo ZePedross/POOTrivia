@@ -12,32 +12,69 @@ import java.util.Collections;
 
 public class ButtonListener implements ActionListener {
 
+    private GamePanel panel;
+    private POOTrivia pooTrivia;
+    private ArrayList<Pergunta> perguntas;
+    private ArrayList<Player> jogadores;
+
+    private ArrayList<String> respostasDadas = new ArrayList<>();
 
     protected String resp;
-    private GamePanel panel;
-    private ArrayList<Pergunta> perguntas;
 
-    private int pergunta = 0;
+    private int pontuacao;
+    private int contaCertas;
+    private int pergunta;
 
-    public ButtonListener(GamePanel panel, ArrayList<Pergunta> perguntas) {
+    public ButtonListener(GamePanel panel, POOTrivia pooTrivia, ArrayList<Pergunta> perguntas, ArrayList<Player> jogadores) {
         this.panel = panel;
+        this.pooTrivia = pooTrivia;
         this.perguntas = perguntas;
+        this.jogadores = jogadores;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Novo Jogo")) {
+            pooTrivia.sortearPerguntas();
+
+            panel.nome.setText("");
+            respostasDadas.clear();
+
+            pergunta = 0;
+            pontuacao = 0;
+            contaCertas = 0;
+
             novaPergunta(pergunta);
-            pergunta++;
         }else if (e.getActionCommand().equals("Sair do Jogo")) {
             if (JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair?", "Sair", JOptionPane.YES_NO_OPTION) == 0) {
+                pooTrivia.escreverFicheiroJogadores();
                 System.exit(0);
             }
+        }else if (e.getActionCommand().equals("Enviar Nome")) {
+            if (!panel.nome.toString().isEmpty()) {
+                jogadores.add(new Player(panel.nome.getText(), respostasDadas));
+                mostrarPainelFinal(contaCertas, pontuacao);
+            }else {
+                JOptionPane.showMessageDialog(null, "Um nome tem que ser inserido!");
+            }
         }else if (e.getActionCommand().equals(resp)) {
-            novaPergunta(pergunta);
-            pergunta++;
-        }else if (e.getActionCommand().equals(resp) && pergunta == 5) {
-
+            pontuacao += perguntas.get(pergunta).pontuacao();
+            contaCertas++;
+            respostasDadas.add(perguntas.get(pergunta).getCategoria() + ", Acertou");
+            if(pergunta != perguntas.size() - 1) {
+                pergunta++;
+                novaPergunta(pergunta);
+            }else {
+                mostrarPainelNomePlayer();
+            }
+        }else if (!e.getActionCommand().equals(resp)) {
+            respostasDadas.add(perguntas.get(pergunta).getCategoria() + ", Errada");
+            if (pergunta != 4) {
+                pergunta++;
+                novaPergunta(pergunta);
+            }else {
+                mostrarPainelNomePlayer();
+            }
         }
     }
 
@@ -49,10 +86,20 @@ public class ButtonListener implements ActionListener {
         resp = perguntas.get(index).getCorreta();
         Collections.shuffle(opcoes);
         if (opcoes.size() == 2) {
-            panel.painelPerguntasVF(cat, perg, opcoes);
+            panel.painelPerguntasVF(cat, perg, pontuacao);
         } else {
-            panel.painelPerguntasOpcoes(cat, perg, opcoes);
+            panel.painelPerguntasOpcoes(cat, perg, opcoes, pontuacao);
         }
+    }
+
+    public void mostrarPainelNomePlayer() {
+        panel.repaint();
+        panel.painelNomePlayer();
+    }
+
+    public void mostrarPainelFinal(int certas, int score) {
+        panel.repaint();
+        panel.painelFimJogo(certas, score);
     }
 }
 

@@ -26,8 +26,8 @@ public class Ski extends Pergunta{
         return this.opcoes.get(0);
     }
 
-    public void pontuacao(int pontuacao) {
-        pontuacao += 3 + getPontuacaoBase() * 2;
+    public int pontuacao() {
+        return 3 + getPontuacaoBase() * 2;
     }
 
     @Override

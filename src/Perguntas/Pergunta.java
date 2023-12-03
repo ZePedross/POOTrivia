@@ -56,7 +56,7 @@ public abstract class Pergunta {
 
     public abstract String getCorreta();
 
-    public abstract void pontuacao(int pontuacao);
+    public abstract int pontuacao();
 
     @Override
     public String toString() {

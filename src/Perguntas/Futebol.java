@@ -36,8 +36,8 @@ public class Futebol extends Pergunta{
         return opcoes;
     }
 
-    public void pontuacao(int pontuacao) {
-        pontuacao += getPontuacaoBase() + 4;
+    public int pontuacao() {
+        return getPontuacaoBase() + 4;
     }
 
     @Override

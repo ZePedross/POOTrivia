@@ -39,8 +39,8 @@ public class Ciencia extends Pergunta{
         return opcoes;
     }
 
-    public void pontuacao(int pontuacao) {
-        pontuacao += getPontuacaoBase() + 5;
+    public int pontuacao() {
+        return getPontuacaoBase() + 5;
     }
 
     @Override

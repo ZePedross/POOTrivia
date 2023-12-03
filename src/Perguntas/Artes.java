@@ -26,8 +26,8 @@ public class Artes extends Pergunta{
         return this.opcoes.get(0);
     }
 
-    public void pontuacao(int pontuacao) {
-        pontuacao += getPontuacaoBase() * 10;
+    public int pontuacao() {
+        return getPontuacaoBase() * 10;
     }
 
     @Override
