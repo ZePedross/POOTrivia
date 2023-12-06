@@ -3,13 +3,14 @@ package Main;
 import Perguntas.*;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.Collections;
 
-public class POOTrivia {
+
+public class POOTrivia implements Serializable{
 
     private ArrayList<String> perguntasFicheiro = new ArrayList<>();
 
@@ -19,19 +20,31 @@ public class POOTrivia {
 
     private ArrayList<String> topJogadores = new ArrayList<>();
 
-    private Random rand  = new Random();
+    private ArrayList<Integer> topPontuacoes  = new ArrayList<>();
 
-    public POOTrivia() {
-        lerFicheiroJogadores();
+    private String dataHora;
+
+    public String dataEHora(String dthr){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        LocalDateTime now = LocalDateTime.now();
+        dthr = dtf.format(now);
+        return dthr;
     }
 
     public static void main(String[] args) {
 
         POOTrivia pooTrivia = new POOTrivia();
 
+        Ficheiro ficheiro = new Ficheiro(pooTrivia.perguntas, pooTrivia.perguntasFicheiro, pooTrivia.jogadores);
+
+        ficheiro.sortearPerguntas();
+        ficheiro.lerFicheiroJogadores();
+
         for(Player p: pooTrivia.jogadores) {
             System.out.println(p);
         }
+
+        pooTrivia.rankingTop3(pooTrivia.jogadores,pooTrivia.topPontuacoes);
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +54,8 @@ public class POOTrivia {
         GamePanel panel = new GamePanel();
         panel.painelPrincipal();
 
-        ButtonListener buttonListener = new ButtonListener(panel, pooTrivia, pooTrivia.perguntas, pooTrivia.jogadores);
+
+        ButtonListener buttonListener = new ButtonListener(panel, ficheiro, pooTrivia, pooTrivia.perguntas, pooTrivia.jogadores, pooTrivia.dataEHora(pooTrivia.dataHora));
         panel.opc1.addActionListener(buttonListener);
         panel.opc2.addActionListener(buttonListener);
         panel.opc3.addActionListener(buttonListener);
@@ -53,115 +67,44 @@ public class POOTrivia {
         panel.falso.addActionListener(buttonListener);
         panel.enviar.addActionListener(buttonListener);
 
+
         window.add(panel);
 
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
     }
 
-    public void sortearPerguntas(){
-        perguntas.clear();
-        File f = new File("Perguntas.txt");
-        if(f.exists() && f.isFile()){
-            try{
-                FileReader fr = new FileReader(f);
-                BufferedReader br = new BufferedReader(fr);
-                String linha;
-                while ((linha = br.readLine()) != null){
-                    perguntasFicheiro.add(linha);
-                }
-
-                while(perguntasFicheiro.size() > 5) {
-                    perguntasFicheiro.remove(rand.nextInt(perguntasFicheiro.size()));
-                }
-
-                int idx = 1;
-                for (String p: perguntasFicheiro) {
-                    String[] infoPergunta = p.split(" / ");
-                    String categoria = infoPergunta[0];
-                    ArrayList<String> opcoes = new ArrayList<>(Arrays.asList(infoPergunta).subList(2, infoPergunta.length));
-                    switch (categoria) {
-                        case "Artes":
-                            perguntas.add(new Artes(categoria, infoPergunta[1], opcoes, idx));
-                            break;
-                        case "Ciências":
-                            perguntas.add(new Ciencia(categoria, infoPergunta[1], opcoes, idx));
-                            break;
-                        case "Natação":
-                            perguntas.add(new Natacao(categoria, infoPergunta[1], opcoes, idx));
-                            break;
-                        case "Ski":
-                            perguntas.add(new Ski(categoria, infoPergunta[1], opcoes, idx));
-                            break;
-                        case "Futebol":
-                            perguntas.add(new Futebol(categoria, infoPergunta[1], opcoes, idx));
-                            break;
-                        default:
-                            System.out.println("A categoria não existe, logo a pergunta não foi criada.");
-                            break;
+    public void rankingTop3(ArrayList<Player> player, ArrayList<Integer> topPontuacoes) {
+        if(!player.isEmpty()){
+            ArrayList<Integer> Pontuacoes = new ArrayList<>();
+            for(Player p : player){
+                int pontuacao = 0;
+                for(Pergunta pergunta : p.getRespostasDadas()){
+                    if(pergunta.isAcertou()){
+                        pontuacao += pergunta.pontuacao();
                     }
-                    idx++;
                 }
-            } catch (FileNotFoundException e) {
-                System.out.println("Erro ao abrir o ficheiro de texto.");
-            } catch (IOException e) {
-                System.out.println("Erro ao ler o ficheiro de texto.");
+                Pontuacoes.add(pontuacao);
             }
-        }
-        else{
-            System.out.println("O ficheiro não existe!");
-        }
-    }
 
-    public void lerFicheiroJogadores() {
-        File f = new File("Jogadores.txt");
-        if(f.exists() && f.isFile()){
-            try{
-                FileReader fr = new FileReader(f);
-                BufferedReader br = new BufferedReader(fr);
-                String linha;
-                while ((linha = br.readLine()) != null) {
-                    String[] data = linha.split(" / ");
-                    String name = data[0];
-                    ArrayList<String> respostasDadas = new ArrayList<>(Arrays.asList(data).subList(1, data.length));
-                    jogadores.add(new Player(name, respostasDadas));
-                }
-                br.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("Erro ao abrir o ficheiro de texto.");
-            } catch (IOException e) {
-                System.out.println("Erro ao ler o ficheiro de texto.");
-            }
-        }
-        else{
-            System.out.println("O ficheiro não existe!");
-        }
-    }
+            int paragem = Math.min(Pontuacoes.size(), 3);
 
-    public void escreverFicheiroJogadores() {
-        File f = new File("Jogadores.txt");
-        if(f.exists() && f.isFile()){
-            try{
-                FileWriter fw = new FileWriter(f);
-                BufferedWriter bw = new BufferedWriter(fw);
-                for (Player player : jogadores) {
-                    bw.write(player.name + " / ");
-                    for (String resposta : player.respostasDadas) {
-                        bw.write(resposta + " / ");
+            for(int i = 0; i < paragem; i++){
+                int max = 0;
+                for(int pontuacao : Pontuacoes){
+                    if(pontuacao > max){
+                        max = pontuacao;
                     }
-                    bw.newLine();
                 }
-                bw.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("Erro ao abrir o ficheiro de texto.");
-            } catch (IOException e) {
-                System.out.println("Erro ao ler o ficheiro de texto.");
+                topPontuacoes.add(max);
+                topJogadores.add(jogadores.get(Pontuacoes.indexOf(max)).getName());
+                Pontuacoes.remove(Pontuacoes.indexOf(max));
             }
-        }
-        else{
-            System.out.println("O ficheiro não existe!");
+        }else{
+            System.out.println("Ainda não existem jogadores");
         }
     }
 }

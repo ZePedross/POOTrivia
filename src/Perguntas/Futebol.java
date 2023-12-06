@@ -1,9 +1,10 @@
 package Perguntas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Futebol extends Pergunta{
+public class Futebol extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 

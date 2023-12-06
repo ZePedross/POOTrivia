@@ -1,14 +1,16 @@
 package Perguntas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Artes extends Pergunta{
+public class Artes extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 
     public Artes(String categoria, String pergunta, ArrayList<String> opcoes, int index) {
         super(categoria, pergunta, opcoes, index);
-        this.opcoes = opcoes;
+        this.opcoes = esolheOpcoes(opcoes);
     }
 
     @Override
@@ -28,6 +30,15 @@ public class Artes extends Pergunta{
 
     public int pontuacao() {
         return getPontuacaoBase() * 10;
+    }
+
+    public ArrayList<String> esolheOpcoes(ArrayList<String> opcoes){
+        Random rand = new Random();
+        if(getIndex() < 3){
+            opcoes.remove(rand.nextInt(1, opcoes.size()));
+            opcoes.remove(rand.nextInt(1, opcoes.size()));
+        }
+        return opcoes;
     }
 
     @Override

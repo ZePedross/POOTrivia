@@ -93,9 +93,9 @@ public class GamePanel extends JPanel {
         int xScore = center - (s.getPreferredSize().width / 2);
         int yScore = screenHeight - 20;
 
-        c.setBounds(xCategoria, yCategoria, c.getPreferredSize().width, c.getPreferredSize().height);
+        c.setBounds(xCategoria, yCategoria, 400, c.getPreferredSize().height);
         p.setBounds(xPergunta, yPergunta, p.getPreferredSize().width, p.getPreferredSize().height);
-        s.setBounds(xScore, yScore, s.getPreferredSize().width, s.getPreferredSize().height);
+        s.setBounds(xScore, yScore, 250, s.getPreferredSize().height);
 
         this.add(c);
         this.add(p);
@@ -132,6 +132,62 @@ public class GamePanel extends JPanel {
         this.add(opc5);
     }
 
+    public void painelPerguntasOpcoesArtes(String categoria, String pergunta, ArrayList<String> opcoes, int score) {
+        removeAll();
+
+        JLabel c = new JLabel(categoria);
+        c.setFont(new Font("Verdana", Font.BOLD, 30));
+        c.setForeground(Color.BLACK);
+
+        JTextArea p = new JTextArea(pergunta, 3, 30);
+        p.setFont(new Font("Arial", Font.BOLD, 20));
+        p.setForeground(Color.BLACK);
+        p.setWrapStyleWord(true);
+        p.setLineWrap(true);
+        p.setEditable(false);
+
+        JLabel s = new JLabel("Score: " + score);
+        s.setFont(new Font("Arial", Font.BOLD, 15));
+        s.setForeground(Color.BLACK);
+
+        int xCategoria = center - (c.getPreferredSize().width / 2);
+        int yCategoria = 50;
+
+        int xPergunta = center - (p.getPreferredSize().width / 2);
+        int yPergunta = 100;
+
+        int xScore = center - (s.getPreferredSize().width / 2);
+        int yScore = screenHeight - 20;
+
+        c.setBounds(xCategoria, yCategoria, 400, c.getPreferredSize().height);
+        p.setBounds(xPergunta, yPergunta, p.getPreferredSize().width, p.getPreferredSize().height);
+        s.setBounds(xScore, yScore, 250, s.getPreferredSize().height);
+
+        this.add(c);
+        this.add(p);
+        this.add(s);
+
+        int xOpc = center - 150;
+        int yOpc = screenHeight / 2;
+
+        opc1.setText(opcoes.get(0));
+        opc2.setText(opcoes.get(1));
+        opc3.setText(opcoes.get(2));
+
+        opc1.setBounds(xOpc, yOpc - 88, 300, 50);
+        opc1.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        opc2.setBounds(xOpc, yOpc - 12, 300, 50);
+        opc2.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        opc3.setBounds(xOpc, yOpc + 62, 300, 50);
+        opc3.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        this.add(opc1);
+        this.add(opc2);
+        this.add(opc3);
+    }
+
     public void painelPerguntasVF(String categoria, String pergunta, int score) {
         removeAll();
 
@@ -159,9 +215,9 @@ public class GamePanel extends JPanel {
         int xScore = center - (s.getPreferredSize().width / 2);
         int yScore = screenHeight - 20;
 
-        c.setBounds(xCategoria, yCategoria, c.getPreferredSize().width, c.getPreferredSize().height);
+        c.setBounds(xCategoria, yCategoria, 400, c.getPreferredSize().height);
         p.setBounds(xPergunta, yPergunta, p.getPreferredSize().width, p.getPreferredSize().height);
-        s.setBounds(xScore, yScore, s.getPreferredSize().width, s.getPreferredSize().height);
+        s.setBounds(xScore, yScore, 250, s.getPreferredSize().height);
 
         this.add(c);
         this.add(p);
@@ -191,7 +247,7 @@ public class GamePanel extends JPanel {
         int xNomeTexto = center - (nomeTexto.getPreferredSize().width / 2);
         int yNomeTexto = 200;
 
-        nomeTexto.setBounds(xNomeTexto, yNomeTexto, nomeTexto.getPreferredSize().width, nomeTexto.getPreferredSize().height);
+        nomeTexto.setBounds(xNomeTexto, yNomeTexto, 720, nomeTexto.getPreferredSize().height);
 
         this.add(nomeTexto);
 
@@ -236,7 +292,7 @@ public class GamePanel extends JPanel {
         int xRanking = center - (ranking.getPreferredSize().width / 2);
         int yRanking = 175;
 
-        parabens.setBounds(xParabens, yParabens, parabens.getPreferredSize().width, parabens.getPreferredSize().height);
+        parabens.setBounds(xParabens, yParabens, 720, parabens.getPreferredSize().height);
         pontuacao.setBounds(xScore, yScore, pontuacao.getPreferredSize().width, pontuacao.getPreferredSize().height);
         ranking.setBounds(xRanking, yRanking, ranking.getPreferredSize().width, ranking.getPreferredSize().height);
 

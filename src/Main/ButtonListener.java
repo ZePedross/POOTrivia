@@ -6,18 +6,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class ButtonListener implements ActionListener {
 
+    private String datahora;
     private GamePanel panel;
+
+    private Ficheiro ficheiro;
+
     private POOTrivia pooTrivia;
+
     private ArrayList<Pergunta> perguntas;
+
     private ArrayList<Player> jogadores;
 
-    private ArrayList<String> respostasDadas = new ArrayList<>();
+    private ArrayList<Pergunta> respostasDadas = new ArrayList<>();
 
     protected String resp;
 
@@ -25,17 +33,21 @@ public class ButtonListener implements ActionListener {
     private int contaCertas;
     private int pergunta;
 
-    public ButtonListener(GamePanel panel, POOTrivia pooTrivia, ArrayList<Pergunta> perguntas, ArrayList<Player> jogadores) {
+
+    public ButtonListener(GamePanel panel, Ficheiro ficheiro, POOTrivia pooTrivia, ArrayList<Pergunta> perguntas, ArrayList<Player> jogadores, String datahora) {
         this.panel = panel;
         this.pooTrivia = pooTrivia;
         this.perguntas = perguntas;
         this.jogadores = jogadores;
+        this.ficheiro = ficheiro;
+        this.datahora = datahora;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Novo Jogo")) {
-            pooTrivia.sortearPerguntas();
+            pooTrivia.dataEHora(datahora);
+            ficheiro.sortearPerguntas();
 
             panel.nome.setText("");
             respostasDadas.clear();
@@ -47,20 +59,26 @@ public class ButtonListener implements ActionListener {
             novaPergunta(pergunta);
         }else if (e.getActionCommand().equals("Sair do Jogo")) {
             if (JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair?", "Sair", JOptionPane.YES_NO_OPTION) == 0) {
-                pooTrivia.escreverFicheiroJogadores();
+                ficheiro.escreverFicheiroJogadores();
                 System.exit(0);
             }
         }else if (e.getActionCommand().equals("Enviar Nome")) {
-            if (!panel.nome.toString().isEmpty()) {
-                jogadores.add(new Player(panel.nome.getText(), respostasDadas));
-                mostrarPainelFinal(contaCertas, pontuacao);
+            if (!panel.nome.getText().isEmpty()) {
+                jogadores.add(new Player(panel.nome.getText(), respostasDadas, datahora));
+                for(Player player: jogadores) {
+                    if(player.getName().equals(panel.nome.getText())) {
+                        mostrarPainelFinal(contaCertas, pontuacao, player);
+                    }
+                }
             }else {
                 JOptionPane.showMessageDialog(null, "Um nome tem que ser inserido!");
             }
         }else if (e.getActionCommand().equals(resp)) {
             pontuacao += perguntas.get(pergunta).pontuacao();
             contaCertas++;
-            respostasDadas.add(perguntas.get(pergunta).getCategoria() + ", Acertou");
+            respostasDadas.add(perguntas.get(pergunta));
+            JOptionPane.showMessageDialog(null, "Acertou!");
+            perguntas.get(pergunta).setAcertou();
             if(pergunta != perguntas.size() - 1) {
                 pergunta++;
                 novaPergunta(pergunta);
@@ -68,7 +86,7 @@ public class ButtonListener implements ActionListener {
                 mostrarPainelNomePlayer();
             }
         }else if (!e.getActionCommand().equals(resp)) {
-            respostasDadas.add(perguntas.get(pergunta).getCategoria() + ", Errada");
+            JOptionPane.showMessageDialog(null, "Errou!");
             if (pergunta != 4) {
                 pergunta++;
                 novaPergunta(pergunta);
@@ -87,6 +105,8 @@ public class ButtonListener implements ActionListener {
         Collections.shuffle(opcoes);
         if (opcoes.size() == 2) {
             panel.painelPerguntasVF(cat, perg, pontuacao);
+        } else if (opcoes.size() == 3) {
+            panel.painelPerguntasOpcoesArtes(cat, perg, opcoes, pontuacao);
         } else {
             panel.painelPerguntasOpcoes(cat, perg, opcoes, pontuacao);
         }
@@ -97,9 +117,11 @@ public class ButtonListener implements ActionListener {
         panel.painelNomePlayer();
     }
 
-    public void mostrarPainelFinal(int certas, int score) {
+    public void mostrarPainelFinal(int certas, int score, Player player) {
         panel.repaint();
         panel.painelFimJogo(certas, score);
+        String nomeFicheiro = ficheiro.nomeFicheiro(player.getIniciaisnome(), this.datahora);
+        ficheiro.escreverFicheiroObjetos(nomeFicheiro, player);
     }
 }
 

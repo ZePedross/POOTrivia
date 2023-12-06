@@ -1,8 +1,9 @@
 package Perguntas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Pergunta {
+public abstract class Pergunta implements Serializable {
 
     protected String categoria, pergunta;
 
@@ -10,12 +11,22 @@ public abstract class Pergunta {
 
     protected int pontuacaoBase, index;
 
+    protected boolean acertou;
+
     public Pergunta(String categoria, String pergunta, ArrayList<String> opcoes, int index){
         this.categoria = categoria;
         this.pergunta = pergunta;
         this.opcoes = opcoes;
         this.pontuacaoBase = 5;
         this.index = index;
+    }
+
+    public void setAcertou() {
+        this.acertou = true;
+    }
+
+    public boolean isAcertou() {
+        return acertou;
     }
 
     public String getCategoria() {

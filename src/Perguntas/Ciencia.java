@@ -1,8 +1,9 @@
 package Perguntas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ciencia extends Pergunta{
+public class Ciencia extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 
@@ -28,13 +29,9 @@ public class Ciencia extends Pergunta{
 
     public ArrayList<String> escolheOpcoes(ArrayList<String> opcoes) {
         if (getIndex() < 3) {
-            for(int o = 0; o < 4; o++) {
-                opcoes.remove(5);
-            }
+            opcoes.subList(5,9).clear();
         }else {
-            for(int o = 0; o < 4; o++) {
-                opcoes.remove(1);
-            }
+            opcoes.subList(1, 5).clear();
         }
         return opcoes;
     }

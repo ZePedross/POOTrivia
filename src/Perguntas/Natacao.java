@@ -1,8 +1,9 @@
 package Perguntas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Natacao extends Pergunta{
+public class Natacao extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 

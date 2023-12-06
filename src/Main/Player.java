@@ -1,19 +1,49 @@
 package Main;
 
+import Perguntas.Pergunta;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable {
 
     protected String name;
 
-    protected ArrayList<String> respostasDadas;
+    protected String iniciaisnome;
 
-    protected int pontuacao;
+    protected ArrayList<Pergunta> respostasDadas;
 
-    public Player(String name, ArrayList<String> respostasDadas) {
+    private String dataeHora;
+
+
+    public Player(String name, ArrayList<Pergunta> respostasDadas, String dataeHora) {
         this.name = name;
         this.respostasDadas = respostasDadas;
-        this.pontuacao = 0;
+        this.iniciaisnome = getIniciaisnome();
+        this.dataeHora = dataeHora;
+    }
+
+    public String getIniciaisnome() {
+        String in = "";
+        String nome = getName();
+        for(int n = 0; n < nome.length(); n++){
+            if(Character.isUpperCase(nome.charAt(n))){
+                in += nome.charAt(n);
+            }
+        }
+        return in;
+    }
+
+    public void setIniciaisnome(String iniciaisnome) {
+        this.iniciaisnome = iniciaisnome;
+    }
+
+    public String getDataeHora() {
+        return dataeHora;
+    }
+
+    public void setDataeHora(String dataeHora) {
+        this.dataeHora = dataeHora;
     }
 
     public String getName() {
@@ -24,20 +54,12 @@ public class Player {
         this.name = name;
     }
 
-    public ArrayList<String> getRespostasDadas() {
+    public ArrayList<Pergunta> getRespostasDadas() {
         return respostasDadas;
     }
 
-    public void setRespostasDadas(ArrayList<String> respostasDadas) {
+    public void setRespostasDadas(ArrayList<Pergunta> respostasDadas) {
         this.respostasDadas = respostasDadas;
-    }
-
-    public int getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao = pontuacao;
     }
 
     @Override
