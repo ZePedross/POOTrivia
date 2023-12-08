@@ -14,7 +14,7 @@ Ski / 5 / A velocidade recorde atingida no estilo speed skiing foi de 250 km/h. 
 Ski / 5 / O pais com mais resorts de ski é a Suiça. / Falso / Verdadeiro
 Ski / 5 / As pistas de ski com maior grau de dificuldade são marcadas por dois losangos pretos. / Verdadeiro / Falso
 Futebol / 5 / Qual o nome ou o numero do jogador com mais bolas de ouro do mundo? / Lionel Messi / Cristiano Ronaldo / Neymar / Benzema / Luis Suarez / 10 / 7 / 9 / 11 / 8
-Futebol / 5 / Qual o nome ou  numero do maior goleador da história do futebol? / Cristiano Ronaldo / Lionel Messi / Zlatan Ibrahimovic / Luis Suarez / Iniesta / 7 / 9 / 10 / 8 / 13
+Futebol / 5 / Qual o nome ou numero do maior goleador da história do futebol? / Cristiano Ronaldo / Lionel Messi / Zlatan Ibrahimovic / Luis Suarez / Iniesta / 7 / 9 / 10 / 8 / 13
 Futebol / 5 / Qual o numero ou nome do jogador com a transferência mais cara da história do futebol? / Neymar / Mbappé / Maguire / Bellingham / João Félix / 10 / 7 / 5 / 6 / 11
 Futebol / 5 / Qual o numero ou nome do jogador que ganhou o troféu Kopa em 2023? / Bellingham / Musiala / Gavi / António Silva / João Neves / 5 / 10 / 3 / 12 / 9
 Futebol / 5 / Qual o nome ou numero do jogador que venceu a bola de ouro em 2007? / Kaká / Cristiano Ronaldo / Lionel Messi / Drogba / Iniesta / 22 / 14 / 7 / 2 / 5
