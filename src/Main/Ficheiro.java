@@ -95,10 +95,6 @@ public class Ficheiro implements Serializable {
                         Player player = lerFicheiroObjetos(linha);
                         jogadores.add(player);
                     }
-                    //String[] data = linha.split(" / ");
-                    //String name = data[0];
-                    //ArrayList<String> respostasDadas = new ArrayList<>(Arrays.asList(data).subList(1, data.length));
-                    //jogadores.add(new Player(name, respostasDadas));
                 }
                 br.close();
             } catch (IOException e) {

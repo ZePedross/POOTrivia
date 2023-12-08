@@ -2,6 +2,7 @@ package Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
@@ -11,7 +12,7 @@ public class GamePanel extends JPanel {
 
     protected int center = (screenWidth / 2);
 
-    protected JButton novoJogo, verRank, sairJogo, opc1, opc2, opc3, opc4, opc5, verdadeiro, falso, enviar;
+    protected JButton novoJogo, verRank, sairJogo, opc1, opc2, opc3, opc4, opc5, verdadeiro, falso, enviar, menuPrincipal;
     protected JTextField nome;
 
     public GamePanel() {
@@ -37,9 +38,13 @@ public class GamePanel extends JPanel {
         enviar = new JButton("Enviar Nome");
 
         nome = new JTextField();
+
+        menuPrincipal = new JButton("Menu Principal");
     }
 
     public void painelPrincipal() {
+        removeAll();
+
         JLabel nomeJogo = new JLabel("POOTrivia");
         nomeJogo.setFont(new Font("Arial", Font.BOLD, 20));
         nomeJogo.setForeground(Color.BLACK);
@@ -268,8 +273,9 @@ public class GamePanel extends JPanel {
         this.add(enviar);
     }
 
-    public void painelFimJogo(int certas, int score) {
+    public void painelFimJogo(int certas, int score, ArrayList<String> top3Jogadores) {
         removeAll();
+        int yOpc = screenHeight / 2;
 
         JLabel parabens = new JLabel("Parabéns acertaste um total de " + certas + " perguntas!");
         parabens.setFont(new Font("Verdana", Font.PLAIN, 30));
@@ -282,6 +288,8 @@ public class GamePanel extends JPanel {
         JLabel ranking = new JLabel("TOP 3 JOGADORES");
         ranking.setFont(new Font("Arial", Font.BOLD, 25));
         ranking.setForeground(Color.BLACK);
+
+
 
         int xParabens = center - (parabens.getPreferredSize().width / 2);
         int yParabens = 50;
@@ -296,18 +304,94 @@ public class GamePanel extends JPanel {
         pontuacao.setBounds(xScore, yScore, pontuacao.getPreferredSize().width, pontuacao.getPreferredSize().height);
         ranking.setBounds(xRanking, yRanking, ranking.getPreferredSize().width, ranking.getPreferredSize().height);
 
+        menuPrincipal.setBounds(screenWidth/2 - 100, screenHeight - 55, 200, 50);
+        menuPrincipal.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        this.add(menuPrincipal);
         this.add(parabens);
         this.add(pontuacao);
         this.add(ranking);
 
-        novoJogo.setBounds(screenWidth - 205, screenHeight - 55, 200, 50);
-        novoJogo.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        sairJogo.setBounds(5, screenHeight - 55, 200, 50);
-        sairJogo.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        this.add(novoJogo);
-        this.add(sairJogo);
+        if(!top3Jogadores.isEmpty()) {
+            if (!top3Jogadores.get(0).isEmpty()) {
+                JLabel top1 = new JLabel("1º " + top3Jogadores.get(0));
+                int xOpc = center - (top1.getPreferredSize().width / 2 + 40);
+                top1.setFont(new Font("Arial", Font.BOLD, 20));
+                top1.setBounds(xOpc, yRanking + 50, 300, 50);
+                this.add(top1);
+            }
+
+            if (top3Jogadores.size() >= 2 && !top3Jogadores.get(1).isEmpty()) {
+                JLabel top2 = new JLabel("2º " + top3Jogadores.get(1));
+                int xOpc = center - (top2.getPreferredSize().width / 2 + 40);
+                top2.setFont(new Font("Arial", Font.BOLD, 20));
+                top2.setBounds(xOpc, yRanking +125 , 300, 50);
+                this.add(top2);
+            }
+
+            if (top3Jogadores.size() == 3 && !top3Jogadores.get(2).isEmpty()) {
+                JLabel top3 = new JLabel("3º " + top3Jogadores.get(2));
+                int xOpc = center - (top3.getPreferredSize().width / 2 + 40);
+                top3.setFont(new Font("Arial", Font.BOLD, 20));
+                top3.setBounds(xOpc, yRanking + 200, 300, 50);
+                this.add(top3);
+            }
+        }
+
+    }
+
+    public void painelTop3(ArrayList<String> top3Jogadores){
+        removeAll();
+        int yOpc = screenHeight / 2;
+
+        JLabel ranking = new JLabel("TOP 3 JOGADORES");
+        ranking.setFont(new Font("Arial", Font.BOLD, 25));
+        ranking.setForeground(Color.BLACK);
+        int xRanking = center - (ranking.getPreferredSize().width / 2);
+        int yRanking = 50;
+        ranking.setBounds(xRanking, yRanking, ranking.getPreferredSize().width, ranking.getPreferredSize().height);
+
+        if(!top3Jogadores.isEmpty()){
+            if(!top3Jogadores.get(0).isEmpty()){
+                JLabel top1 = new JLabel("1º " + top3Jogadores.get(0));
+                int xOpc = center - (top1.getPreferredSize().width / 2 + 40);
+                top1.setFont(new Font("Arial", Font.BOLD, 20));
+                top1.setBounds(xOpc, yRanking + 75, 300, 50);
+                this.add(top1);
+            }
+
+            if(top3Jogadores.size() >= 2 && !top3Jogadores.get(1).isEmpty()){
+                JLabel top2 = new JLabel("2º " + top3Jogadores.get(1));
+                int xOpc = center - (top2.getPreferredSize().width / 2 + 40);
+                top2.setFont(new Font("Arial", Font.BOLD, 20));
+                top2.setBounds(xOpc, yRanking + 175, 300, 50);
+                this.add(top2);
+            }
+
+            if(top3Jogadores.size() == 3 && !top3Jogadores.get(2).isEmpty()){
+                JLabel top3 = new JLabel("3º " + top3Jogadores.get(2));
+                int xOpc = center - (top3.getPreferredSize().width / 2 + 40);
+                top3.setFont(new Font("Arial", Font.BOLD, 20));
+                top3.setBounds(xOpc, yRanking + 275, 300, 50);
+                this.add(top3);
+            }
+        }else {
+            JLabel semJogadores = new JLabel("Ainda não existem registos de jogadores");
+            semJogadores.setFont(new Font("Arial", Font.BOLD, 25));
+            semJogadores.setForeground(Color.BLACK);
+            int xsemJogadores = center - (semJogadores.getPreferredSize().width / 2);
+            int ysemJogadores = center - 125 ;
+            semJogadores.setBounds(xsemJogadores, ysemJogadores, semJogadores.getPreferredSize().width, semJogadores.getPreferredSize().height);
+            this.add(semJogadores);
+        }
+
+
+        menuPrincipal.setBounds(screenWidth/2 - 100, screenHeight - 55, 200, 50);
+        menuPrincipal.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        this.add(ranking);
+        this.add(menuPrincipal);
     }
 }

@@ -7,7 +7,6 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class POOTrivia implements Serializable{
@@ -18,17 +17,12 @@ public class POOTrivia implements Serializable{
 
     private ArrayList<Player> jogadores = new ArrayList<>();
 
-    private ArrayList<String> topJogadores = new ArrayList<>();
+    protected ArrayList<String> topJogadores = new ArrayList<>();
 
-    private ArrayList<Integer> topPontuacoes  = new ArrayList<>();
-
-    private String dataHora;
-
-    public String dataEHora(String dthr){
+    public String dataEHora(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
-        dthr = dtf.format(now);
-        return dthr;
+        return dtf.format(now);
     }
 
     public static void main(String[] args) {
@@ -40,11 +34,9 @@ public class POOTrivia implements Serializable{
         ficheiro.sortearPerguntas();
         ficheiro.lerFicheiroJogadores();
 
-        for(Player p: pooTrivia.jogadores) {
-            System.out.println(p);
-        }
+        pooTrivia.rankingTop3(pooTrivia.jogadores);
 
-        pooTrivia.rankingTop3(pooTrivia.jogadores,pooTrivia.topPontuacoes);
+        for(String top3: pooTrivia.topJogadores) System.out.println(top3);
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,15 +46,16 @@ public class POOTrivia implements Serializable{
         GamePanel panel = new GamePanel();
         panel.painelPrincipal();
 
-
-        ButtonListener buttonListener = new ButtonListener(panel, ficheiro, pooTrivia, pooTrivia.perguntas, pooTrivia.jogadores, pooTrivia.dataEHora(pooTrivia.dataHora));
+        ButtonListener buttonListener = new ButtonListener(panel, ficheiro, pooTrivia, pooTrivia.perguntas, pooTrivia.jogadores);
         panel.opc1.addActionListener(buttonListener);
         panel.opc2.addActionListener(buttonListener);
         panel.opc3.addActionListener(buttonListener);
         panel.opc4.addActionListener(buttonListener);
         panel.opc5.addActionListener(buttonListener);
         panel.novoJogo.addActionListener(buttonListener);
+        panel.verRank.addActionListener(buttonListener);
         panel.sairJogo.addActionListener(buttonListener);
+        panel.menuPrincipal.addActionListener(buttonListener);
         panel.verdadeiro.addActionListener(buttonListener);
         panel.falso.addActionListener(buttonListener);
         panel.enviar.addActionListener(buttonListener);
@@ -77,18 +70,24 @@ public class POOTrivia implements Serializable{
 
     }
 
-    public void rankingTop3(ArrayList<Player> player, ArrayList<Integer> topPontuacoes) {
+    public void rankingTop3(ArrayList<Player> player) {
+        topJogadores.clear();
         if(!player.isEmpty()){
             ArrayList<Integer> Pontuacoes = new ArrayList<>();
             for(Player p : player){
+                System.out.println(p.name);
                 int pontuacao = 0;
                 for(Pergunta pergunta : p.getRespostasDadas()){
+                    System.out.println(pergunta.getPergunta());
                     if(pergunta.isAcertou()){
                         pontuacao += pergunta.pontuacao();
                     }
                 }
                 Pontuacoes.add(pontuacao);
+                System.out.println();
             }
+
+            for(Integer p: Pontuacoes) System.out.print(p+" ");
 
             int paragem = Math.min(Pontuacoes.size(), 3);
 
@@ -99,9 +98,8 @@ public class POOTrivia implements Serializable{
                         max = pontuacao;
                     }
                 }
-                topPontuacoes.add(max);
-                topJogadores.add(jogadores.get(Pontuacoes.indexOf(max)).getName());
-                Pontuacoes.remove(Pontuacoes.indexOf(max));
+                topJogadores.add(jogadores.get(Pontuacoes.indexOf(max)).getName() + ": " + max);
+                Pontuacoes.set(Pontuacoes.indexOf(max), -1);
             }
         }else{
             System.out.println("Ainda não existem jogadores");
