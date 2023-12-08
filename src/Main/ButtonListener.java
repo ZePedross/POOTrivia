@@ -63,8 +63,8 @@ public class ButtonListener implements ActionListener {
             }
         } else if (e.getActionCommand().equals("Enviar Nome")) {
             if (!panel.nome.getText().isEmpty()) {
-                if(panel.nome.getText().charAt(0) == ' '){
-                    JOptionPane.showMessageDialog(null, "Não é permitido usar espaços em branco antes do nome!");
+                if(panel.nome.getText().charAt(0) == ' ' || Character.isDigit(panel.nome.getText().charAt(0))){
+                    JOptionPane.showMessageDialog(null, "Não é permitido usar espaços ou números antes do nome!");
                 } else{
                     jogadores.add(new Player(panel.nome.getText(), respostasDadas, dataHora));
                     pooTrivia.rankingTop3(jogadores);

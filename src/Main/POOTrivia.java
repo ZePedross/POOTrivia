@@ -34,14 +34,6 @@ public class POOTrivia implements Serializable{
         ficheiro.sortearPerguntas();
         ficheiro.lerFicheiroJogadores();
 
-        for(Player p: pooTrivia.jogadores){
-            System.out.println(p.getName());
-            for(Pergunta per : p.getRespostasDadas()){
-                System.out.println(per.isAcertou());
-            }
-            System.out.println();
-        }
-
         pooTrivia.rankingTop3(pooTrivia.jogadores);
 
         JFrame window = new JFrame();
