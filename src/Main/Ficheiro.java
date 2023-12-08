@@ -21,12 +21,13 @@ public class Ficheiro implements Serializable {
         this.jogadores = jogadores;
     }
 
-    public String nomeFicheiro(String iniciaisnome, String datahora){
-        return "pootrivia_jogo_" + datahora + "_" + iniciaisnome;
+    public String nomeFicheiro(String iniciaisNome, String dataHora){
+        return "pootrivia_jogo_" + dataHora + "_" + iniciaisNome;
     }
+
     public void sortearPerguntas(){
         Random rand = new Random();
-        perguntas.clear();
+        perguntas.removeAll(perguntas);
         File f = new File("Perguntas.txt");
         if(f.exists() && f.isFile()){
             try{
@@ -45,22 +46,22 @@ public class Ficheiro implements Serializable {
                 for (String p: perguntasFicheiro) {
                     String[] infoPergunta = p.split(" / ");
                     String categoria = infoPergunta[0];
-                    ArrayList<String> opcoes = new ArrayList<>(Arrays.asList(infoPergunta).subList(2, infoPergunta.length));
+                    ArrayList<String> opcoes = new ArrayList<>(Arrays.asList(infoPergunta).subList(3, infoPergunta.length));
                     switch (categoria) {
                         case "Artes":
-                            perguntas.add(new Artes(categoria, infoPergunta[1], opcoes, idx));
+                            perguntas.add(new Artes(categoria, infoPergunta[2], opcoes, idx, Integer.parseInt(infoPergunta[1])));
                             break;
                         case "Ciências":
-                            perguntas.add(new Ciencia(categoria, infoPergunta[1], opcoes, idx));
+                            perguntas.add(new Ciencia(categoria, infoPergunta[2], opcoes, idx, Integer.parseInt(infoPergunta[1])));
                             break;
                         case "Natação":
-                            perguntas.add(new Natacao(categoria, infoPergunta[1], opcoes, idx));
+                            perguntas.add(new Natacao(categoria, infoPergunta[2], opcoes, idx, Integer.parseInt(infoPergunta[1])));
                             break;
                         case "Ski":
-                            perguntas.add(new Ski(categoria, infoPergunta[1], opcoes, idx));
+                            perguntas.add(new Ski(categoria, infoPergunta[2], opcoes, idx, Integer.parseInt(infoPergunta[1])));
                             break;
                         case "Futebol":
-                            perguntas.add(new Futebol(categoria, infoPergunta[1], opcoes, idx));
+                            perguntas.add(new Futebol(categoria, infoPergunta[2], opcoes, idx, Integer.parseInt(infoPergunta[1])));
                             break;
                         default:
                             System.out.println("A categoria não existe, logo a pergunta não foi criada.");
@@ -116,7 +117,7 @@ public class Ficheiro implements Serializable {
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter bw = new BufferedWriter(fw);
                 for (Player player : jogadores) {
-                    bw.write(nomeFicheiro(player.iniciaisnome, player.getDataeHora()) + ".obj");
+                    bw.write(nomeFicheiro(player.iniciaisNome, player.getDataeHora()) + ".obj");
                     bw.newLine();
                 }
                 bw.close();
@@ -128,11 +129,11 @@ public class Ficheiro implements Serializable {
         }
     }
 
-    public void escreverFicheiroObjetos(String nomeficheiro, Player player){
+    public void escreverFicheiroObjetos(String nomeFicheiro, Player player){
         try {
-            File f = new File(nomeficheiro +".obj");
+            File f = new File(nomeFicheiro +".obj");
             if (f.createNewFile()) {
-                System.out.println(nomeficheiro + ".obj foi criado!");
+                System.out.println(nomeFicheiro + ".obj foi criado!");
             }
             try {
                 FileOutputStream fos = new FileOutputStream(f);
@@ -148,8 +149,8 @@ public class Ficheiro implements Serializable {
 
     }
 
-    public Player lerFicheiroObjetos(String nomeficheiro) {
-        File f = new File(nomeficheiro);
+    public Player lerFicheiroObjetos(String nomeFicheiro) {
+        File f = new File(nomeFicheiro);
         try {
             FileInputStream fis = new FileInputStream(f);
             ObjectInputStream ois = new ObjectInputStream(fis);

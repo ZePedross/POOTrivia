@@ -8,8 +8,8 @@ public class Futebol extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 
-    public Futebol(String categoria, String pergunta, ArrayList<String> opcoes, int index) {
-        super(categoria, pergunta, opcoes, index);
+    public Futebol(String categoria, String pergunta, ArrayList<String> opcoes, int index, int pontuacaoBase) {
+        super(categoria, pergunta, opcoes, index, pontuacaoBase);
         this.opcoes = escolheOpcoes(opcoes);
     }
 

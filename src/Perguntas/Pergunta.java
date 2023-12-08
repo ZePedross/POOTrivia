@@ -13,11 +13,11 @@ public abstract class Pergunta implements Serializable {
 
     protected boolean acertou;
 
-    public Pergunta(String categoria, String pergunta, ArrayList<String> opcoes, int index){
+    public Pergunta(String categoria, String pergunta, ArrayList<String> opcoes, int index, int pontuacaoBase){
         this.categoria = categoria;
         this.pergunta = pergunta;
         this.opcoes = opcoes;
-        this.pontuacaoBase = 5;
+        this.pontuacaoBase = pontuacaoBase;
         this.index = index;
     }
 

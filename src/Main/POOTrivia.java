@@ -34,9 +34,15 @@ public class POOTrivia implements Serializable{
         ficheiro.sortearPerguntas();
         ficheiro.lerFicheiroJogadores();
 
-        pooTrivia.rankingTop3(pooTrivia.jogadores);
+        for(Player p: pooTrivia.jogadores){
+            System.out.println(p.getName());
+            for(Pergunta per : p.getRespostasDadas()){
+                System.out.println(per.isAcertou());
+            }
+            System.out.println();
+        }
 
-        for(String top3: pooTrivia.topJogadores) System.out.println(top3);
+        pooTrivia.rankingTop3(pooTrivia.jogadores);
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,19 +81,14 @@ public class POOTrivia implements Serializable{
         if(!player.isEmpty()){
             ArrayList<Integer> Pontuacoes = new ArrayList<>();
             for(Player p : player){
-                System.out.println(p.name);
                 int pontuacao = 0;
                 for(Pergunta pergunta : p.getRespostasDadas()){
-                    System.out.println(pergunta.getPergunta());
                     if(pergunta.isAcertou()){
                         pontuacao += pergunta.pontuacao();
                     }
                 }
                 Pontuacoes.add(pontuacao);
-                System.out.println();
             }
-
-            for(Integer p: Pontuacoes) System.out.print(p+" ");
 
             int paragem = Math.min(Pontuacoes.size(), 3);
 

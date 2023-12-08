@@ -9,7 +9,7 @@ public class Player implements Serializable {
 
     protected String name;
 
-    protected String iniciaisnome;
+    protected String iniciaisNome;
 
     protected ArrayList<Pergunta> respostasDadas;
 
@@ -19,23 +19,29 @@ public class Player implements Serializable {
     public Player(String name, ArrayList<Pergunta> respostasDadas, String dataeHora) {
         this.name = name;
         this.respostasDadas = respostasDadas;
-        this.iniciaisnome = getIniciaisnome();
+        this.iniciaisNome = getIniciaisNome();
         this.dataeHora = dataeHora;
     }
 
-    public String getIniciaisnome() {
-        String in = "";
+    public String getIniciaisNome() {
+        String iniciaisNome = "";
+        int contaMinusculas = 0;
         String nome = getName();
         for(int n = 0; n < nome.length(); n++){
             if(Character.isUpperCase(nome.charAt(n))){
-                in += nome.charAt(n);
+                iniciaisNome += nome.charAt(n);
+            } else{
+                contaMinusculas++;
+            }
+            if(contaMinusculas == nome.length()){
+               iniciaisNome += Character.toUpperCase(nome.charAt(0));
             }
         }
-        return in;
+        return iniciaisNome;
     }
 
-    public void setIniciaisnome(String iniciaisnome) {
-        this.iniciaisnome = iniciaisnome;
+    public void setIniciaisNome(String iniciaisNome) {
+        this.iniciaisNome = iniciaisNome;
     }
 
     public String getDataeHora() {

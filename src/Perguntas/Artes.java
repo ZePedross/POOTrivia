@@ -8,8 +8,8 @@ public class Artes extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 
-    public Artes(String categoria, String pergunta, ArrayList<String> opcoes, int index) {
-        super(categoria, pergunta, opcoes, index);
+    public Artes(String categoria, String pergunta, ArrayList<String> opcoes, int index, int pontuacaoBase) {
+        super(categoria, pergunta, opcoes, index, pontuacaoBase);
         this.opcoes = esolheOpcoes(opcoes);
     }
 

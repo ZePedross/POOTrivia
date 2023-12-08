@@ -3,19 +3,14 @@ package Main;
 import Perguntas.Pergunta;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ButtonListener implements ActionListener {
 
-    private String datahora;
+    private String dataHora;
 
     private GamePanel panel;
 
@@ -27,9 +22,9 @@ public class ButtonListener implements ActionListener {
 
     private ArrayList<Player> jogadores;
 
-    private ArrayList<Pergunta> respostasDadas = new ArrayList<>();
+    private ArrayList<Pergunta> respostasDadas;
 
-    protected String resp;
+    private String resp;
 
     private int pontuacao;
 
@@ -49,15 +44,11 @@ public class ButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Novo Jogo")) {
-            this.datahora = pooTrivia.dataEHora();
+            this.dataHora = pooTrivia.dataEHora();
             ficheiro.sortearPerguntas();
 
             panel.nome.setText("");
-            respostasDadas.clear();
-
-            pergunta = 0;
-            pontuacao = 0;
-            contaCertas = 0;
+            respostasDadas = new ArrayList<>();
 
             novaPergunta(pergunta);
         } else if (e.getActionCommand().equals("Ver Rank")) {
@@ -72,14 +63,17 @@ public class ButtonListener implements ActionListener {
             }
         } else if (e.getActionCommand().equals("Enviar Nome")) {
             if (!panel.nome.getText().isEmpty()) {
-                jogadores.add(new Player(panel.nome.getText(), respostasDadas, datahora));
-                pooTrivia.rankingTop3(jogadores);
-                for(Player player: jogadores) {
-                    if(player.getName().equals(panel.nome.getText())) {
-                        mostrarPainelFinal(contaCertas, pontuacao, player);
+                if(panel.nome.getText().charAt(0) == ' '){
+                    JOptionPane.showMessageDialog(null, "Não é permitido usar espaços em branco antes do nome!");
+                } else{
+                    jogadores.add(new Player(panel.nome.getText(), respostasDadas, dataHora));
+                    pooTrivia.rankingTop3(jogadores);
+                    for(Player player: jogadores) {
+                        if(player.getName().equals(panel.nome.getText())) {
+                            mostrarPainelFinal(contaCertas, pontuacao, player);
+                        }
                     }
                 }
-                for(String top3: pooTrivia.topJogadores) System.out.println(top3);
             }else {
                 JOptionPane.showMessageDialog(null, "Um nome tem que ser inserido!");
             }
@@ -96,6 +90,7 @@ public class ButtonListener implements ActionListener {
                 mostrarPainelNomePlayer();
             }
         }else if (!e.getActionCommand().equals(resp)) {
+            respostasDadas.add(perguntas.get(pergunta));
             JOptionPane.showMessageDialog(null, "Errou!");
             if (pergunta != 4) {
                 pergunta++;
@@ -135,8 +130,12 @@ public class ButtonListener implements ActionListener {
     public void mostrarPainelFinal(int certas, int score, Player player) {
         panel.repaint();
         panel.painelFimJogo(certas, score, pooTrivia.topJogadores);
-        String nomeFicheiro = ficheiro.nomeFicheiro(player.getIniciaisnome(), this.datahora);
+        String nomeFicheiro = ficheiro.nomeFicheiro(player.getIniciaisNome(), this.dataHora);
         ficheiro.escreverFicheiroObjetos(nomeFicheiro, player);
+
+        pergunta = 0;
+        pontuacao = 0;
+        contaCertas = 0;
     }
 
     public void mostarPainelTop3(){

@@ -7,8 +7,8 @@ public class Ski extends Pergunta implements Serializable {
 
     protected ArrayList<String> opcoes;
 
-    public Ski(String categoria, String pergunta, ArrayList<String> opcoes, int index) {
-        super(categoria, pergunta, opcoes, index);
+    public Ski(String categoria, String pergunta, ArrayList<String> opcoes, int index, int pontuacaoBase) {
+        super(categoria, pergunta, opcoes, index, pontuacaoBase);
         this.opcoes = opcoes;
     }
 

@@ -7,12 +7,13 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
 
-    protected int screenWidth = 768;
-    protected int screenHeight = 576;
+    private int screenWidth = 768;
+    private int screenHeight = 576;
 
-    protected int center = (screenWidth / 2);
+    private int center = (screenWidth / 2);
 
     protected JButton novoJogo, verRank, sairJogo, opc1, opc2, opc3, opc4, opc5, verdadeiro, falso, enviar, menuPrincipal;
+
     protected JTextField nome;
 
     public GamePanel() {
@@ -275,7 +276,6 @@ public class GamePanel extends JPanel {
 
     public void painelFimJogo(int certas, int score, ArrayList<String> top3Jogadores) {
         removeAll();
-        int yOpc = screenHeight / 2;
 
         JLabel parabens = new JLabel("Parabéns acertaste um total de " + certas + " perguntas!");
         parabens.setFont(new Font("Verdana", Font.PLAIN, 30));
@@ -344,7 +344,6 @@ public class GamePanel extends JPanel {
 
     public void painelTop3(ArrayList<String> top3Jogadores){
         removeAll();
-        int yOpc = screenHeight / 2;
 
         JLabel ranking = new JLabel("TOP 3 JOGADORES");
         ranking.setFont(new Font("Arial", Font.BOLD, 25));
