@@ -9,7 +9,7 @@ public class Player implements Serializable {
     /**
      * Nome do jogador.
      */
-    protected String name;
+    private String name;
 
     /**
      * Inciais do nome do jogador.
