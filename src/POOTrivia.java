@@ -10,7 +10,7 @@ import java.util.Arrays;
  * responsável pela criação da interface que irá suportar o nosso jogo.
  *
  * @author João Figueiredo e José Pedro
- * @version 1.16
+ * @version 1.17
  */
 
 
@@ -70,10 +70,6 @@ public class POOTrivia implements Serializable{
     public static void main(String[] args) {
 
         POOTrivia pooTrivia = new POOTrivia();
-
-        for (Pergunta perg: pooTrivia.perguntas) {
-            System.out.println(perg.getPergunta());
-        }
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
